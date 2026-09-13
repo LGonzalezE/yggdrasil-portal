@@ -10,20 +10,27 @@ import {
   Code2,
   Workflow,
   Server,
-  HelpCircle
+  HelpCircle,
+  Building2,
+  Terminal,
+  Briefcase
 } from 'lucide-react';
 
 export const PortalNavbar = ({ 
   activeSection, 
   onSectionClick, 
   env, 
-  onEnvChange 
+  onEnvChange,
+  presentationMode = 'commercial',
+  onPresentationModeChange
 }) => {
+  const isCommercial = presentationMode === 'commercial';
+
   const navItems = [
     { id: 'topology', label: 'Topología', icon: Server },
     { id: 'commercial', label: 'Solución Comercial', icon: Sparkles },
+    { id: 'realms', label: isCommercial ? 'Soluciones BIAN' : 'Reinos & Módulos', icon: isCommercial ? Building2 : Layers },
     { id: 'tobe', label: 'Arquitectura To-Be', icon: Workflow },
-    { id: 'realms', label: 'Reinos & Módulos', icon: Layers },
     { id: 'togaf', label: 'Informe TOGAF 10', icon: Shield },
     { id: 'spec', label: 'Especificación', icon: FileCheck2 },
     { id: 'devhub', label: 'Dev Hub', icon: Code2 },
@@ -77,8 +84,39 @@ export const PortalNavbar = ({
           })}
         </nav>
 
-        {/* Environment Selector & Status Pill */}
+        {/* Perspective Switcher (Commercial vs Internal) & Environment Selector */}
         <div className="flex items-center gap-2">
+          {onPresentationModeChange && (
+            <div className="hidden sm:flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 text-[11px] font-semibold">
+              <button
+                type="button"
+                onClick={() => onPresentationModeChange('commercial')}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-lg transition cursor-pointer ${
+                  isCommercial
+                    ? 'bg-amber-500 text-slate-950 font-bold shadow-sm'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+                title="Vista Comercial BIAN para Clientes"
+              >
+                <Building2 className="w-3 h-3" />
+                <span>BIAN</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => onPresentationModeChange('internal')}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-lg transition cursor-pointer ${
+                  !isCommercial
+                    ? 'bg-emerald-500 text-slate-950 font-bold shadow-sm'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+                title="Vista Interna de Sistema para Ingeniería"
+              >
+                <Terminal className="w-3 h-3" />
+                <span>Interno</span>
+              </button>
+            </div>
+          )}
+
           {onEnvChange && (
             <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 text-[11px] font-mono">
               <button

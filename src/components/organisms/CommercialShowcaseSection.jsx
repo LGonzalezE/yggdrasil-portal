@@ -26,7 +26,7 @@ export const CommercialShowcaseSection = () => {
     {
       title: "Co-Pilotos Autónomos con MCP",
       subtitle: "Model Context Protocol & Guardrails",
-      description: "Primer switch financiero gobernado por agentes de IA auditables (Heimdall, Hermod, Loki, Rig) con delimitación estricta de alcance, análisis forense de fallas y circuito Human-in-the-Loop.",
+      description: "Primer switch financiero gobernado por agentes de IA auditables integrados en cada solución (Heimdall, Hermod, Loki, Rig) con delimitación estricta de alcance, análisis forense y circuito Human-in-the-Loop.",
       icon: Cpu,
       color: "cyan",
       metrics: "4 Agentes Autónomos • HITL Seguro"
@@ -60,17 +60,17 @@ export const CommercialShowcaseSection = () => {
     {
       role: "Bancos y Emisores",
       pain: "Pruebas lentas de certificación y dependencia de autorizadores reales costosos.",
-      gain: "Simulación de adquirentes e inyección de contingencias en microsegundos con Utgard y Asgard."
+      gain: "Simulación de adquirentes e inyección de contingencias con el Simulador Multi-Emisor [Utgard] y el Switch de Autorización [Asgard]."
     },
     {
       role: "Redes Adquirentes & Switches",
       pain: "Riesgos de caída ante picos de compras y saturación en fechas comerciales críticas.",
-      gain: "Inyección de estrés masivo de hasta 200 hilos concurrentes y validación de reglas STIP locales."
+      gain: "Inyección de estrés masivo (>10,000 TPS) con la Pasarela de Certificación [Bifröst] y validación de reglas STIP locales."
     },
     {
       role: "Fintechs y Pasarelas de Pago",
       pain: "Altos costos de auditoría PCI-DSS y fricción en la integración de terminales POS.",
-      gain: "Catálogo pre-aprovisionado de comercios, terminales y tarjetas tokenizadas en Midgard."
+      gain: "Catálogo pre-aprovisionado de comercios, terminales y cuentas tokenizadas en el Directorio Maestro de Productos [Midgard]."
     }
   ];
 

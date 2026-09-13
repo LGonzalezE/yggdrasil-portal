@@ -84,78 +84,92 @@ export const PlatformTopologyAnimation = () => {
       id: 'valgrind',
       x: 180,
       y: 110,
-      title: 'Valgrind Gateway',
+      title: 'Pasarela Zero-Trust',
+      codename: 'Valgrind',
+      bian: 'Enterprise Access PEP',
       port: ':8080',
       tag: 'Edge PDP <2ms',
       color: '#38bdf8',
       icon: ShieldCheck,
-      details: 'Valida tokens JWKS con Glitnir y acuña JWTs internos efímeros con política Fail-Closed.'
+      details: 'Punto de cumplimiento de políticas (PEP). Valida tokens JWKS con Glitnir y acuña JWTs internos efímeros con política Fail-Closed.'
     },
     {
       id: 'svalinn',
       x: 400,
       y: 110,
-      title: 'Svalinn Guardrails',
+      title: 'Escudo IA & DLP',
+      codename: 'Svalinn',
+      bian: 'AI Safety Boundary',
       port: ':8000',
       tag: 'AI Safety & PII',
       color: '#06b6d4',
       icon: Lock,
-      details: 'Escudo perimetral para agentes IA. Detección de Prompt Injection y enmascaramiento PAN.'
+      details: 'Barrera perimetral para agentes IA. Detección de Prompt Injection, enmascaramiento PAN y circuito Human-in-the-Loop.'
     },
     {
       id: 'asgard',
       x: 620,
       y: 230,
-      title: 'Asgard QA Switch',
+      title: 'Switch Transaccional',
+      codename: 'Asgard',
+      bian: 'Financial Gateway',
       port: ':8083 / :8087',
       tag: 'Netty Switching',
       color: '#f59e0b',
       icon: Zap,
-      details: 'Switch conmutador ISO 8583/HPDH. Ruteo STIP de alta velocidad y sniffer de tráfico.'
+      details: 'Switch conmutador ISO 8583/HPDH en sockets reactivos Netty. Ruteo STIP de alta velocidad y sniffer de tráfico en vivo.'
     },
     {
       id: 'utgard',
       x: 840,
       y: 230,
-      title: 'Utgard QA Simulator',
+      title: 'Simulador Multi-Host',
+      codename: 'Utgard',
+      bian: 'Card Authorization',
       port: ':8086 / :5050',
       tag: 'Multi-Host SpEL',
       color: '#a855f7',
       icon: Flame,
-      details: 'Emulación de autorizadores Visa/MC con reglas SpEL declarativas e inyección de caos.'
+      details: 'Emulador de autorizadores Visa/MC/Amex con reglas SpEL declarativas en caliente e inyección de contingencias de red.'
     },
     {
       id: 'bifrost',
       x: 400,
       y: 350,
-      title: 'Bifrost QA Gate',
+      title: 'Certificación de Pagos',
+      codename: 'Bifröst',
+      bian: 'Payment Assessment',
       port: ':8081',
       tag: 'DSL Orchestrator',
       color: '#10b981',
       icon: Cpu,
-      details: 'Orquestación de escenarios E2E, banco de pruebas de estrés y puente MCP Heimdall.'
+      details: 'Orquestación de escenarios E2E, inyección de estrés masivo concurrente (>10,000 TPS) y puente MCP gobernado.'
     },
     {
       id: 'midgard',
       x: 180,
       y: 350,
-      title: 'Midgard QA Entities',
+      title: 'Directorio de Cuentas',
+      codename: 'Midgard',
+      bian: 'Card Product Directory',
       port: ':8082',
       tag: 'PCI-DSS Vault',
       color: '#14b8a6',
       icon: Database,
-      details: 'Catálogo de comercios, terminales POS y tarjetas de prueba con algoritmo de Luhn.'
+      details: 'Gestión de datos maestros (MDM): catálogo de comercios, terminales POS y tarjetas de prueba tokenizadas con algoritmo de Luhn.'
     },
     {
       id: 'mimir',
       x: 620,
       y: 390,
-      title: 'Mimir Storage Vault',
+      title: 'Bóveda Inmutable WORM',
+      codename: 'Mímir',
+      bian: 'Audit Ledger',
       port: ':8084 / S3',
       tag: 'WORM Archival',
       color: '#6366f1',
       icon: Layers,
-      details: 'Bóveda híbrida de evidencias y trazabilidad criptográfica SHA-256 en cadena.'
+      details: 'Bóveda inmutable de evidencias transaccionales y trazabilidad forense con sellado criptográfico SHA-256 en cadena.'
     }
   ];
 
@@ -386,10 +400,10 @@ export const PlatformTopologyAnimation = () => {
                 {/* Node Text Info */}
                 <text
                   x={node.x}
-                  y={node.y - 46}
+                  y={node.y - 48}
                   textAnchor="middle"
                   fill="#f8fafc"
-                  fontSize="12"
+                  fontSize="11"
                   fontWeight="bold"
                   fontFamily="sans-serif"
                 >
@@ -398,7 +412,19 @@ export const PlatformTopologyAnimation = () => {
 
                 <text
                   x={node.x}
-                  y={node.y + 48}
+                  y={node.y - 35}
+                  textAnchor="middle"
+                  fill="#fbbf24"
+                  fontSize="9"
+                  fontFamily="monospace"
+                  fontWeight="bold"
+                >
+                  [{node.codename}]
+                </text>
+
+                <text
+                  x={node.x}
+                  y={node.y + 46}
                   textAnchor="middle"
                   fill="#94a3b8"
                   fontSize="10"
@@ -409,7 +435,7 @@ export const PlatformTopologyAnimation = () => {
 
                 <text
                   x={node.x}
-                  y={node.y + 60}
+                  y={node.y + 58}
                   textAnchor="middle"
                   fill={node.color}
                   fontSize="9"
@@ -429,7 +455,11 @@ export const PlatformTopologyAnimation = () => {
             <div className="flex items-center gap-2 mb-1.5">
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: activeNode.color }} />
               <span className="font-bold text-white text-sm">{activeNode.title}</span>
+              <span className="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20 font-bold">[{activeNode.codename}]</span>
               <span className="text-[10px] font-mono text-slate-400 ml-auto">{activeNode.port}</span>
+            </div>
+            <div className="text-[10px] font-mono text-emerald-400 font-semibold mb-1">
+              BIAN: {activeNode.bian}
             </div>
             <p className="text-slate-300 leading-relaxed">{activeNode.details}</p>
           </div>

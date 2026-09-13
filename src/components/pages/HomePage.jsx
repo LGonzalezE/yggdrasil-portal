@@ -29,7 +29,10 @@ import {
   Code2,
   Lock,
   Workflow,
-  HelpCircle
+  HelpCircle,
+  Building2,
+  Briefcase,
+  Tag
 } from 'lucide-react';
 
 export const HomePage = () => {
@@ -37,8 +40,10 @@ export const HomePage = () => {
   const [selectedRealm, setSelectedRealm] = useState(null);
   const [env, setEnv] = useState('dev'); // 'dev' | 'local'
   const [activeSection, setActiveSection] = useState('topology');
+  const [presentationMode, setPresentationMode] = useState('commercial'); // 'commercial' | 'internal'
 
   const activeApps = REALMS.filter(r => r.hasApp);
+  const isCommercial = presentationMode === 'commercial';
 
   const scrollToSection = (sectionId) => {
     setActiveSection(sectionId);
@@ -56,6 +61,8 @@ export const HomePage = () => {
           onSectionClick={scrollToSection}
           env={env}
           onEnvChange={setEnv}
+          presentationMode={presentationMode}
+          onPresentationModeChange={setPresentationMode}
         />
       }
     >
@@ -76,15 +83,29 @@ export const HomePage = () => {
           <div className="relative z-10 max-w-4xl space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-amber-500/10 text-amber-300 border border-amber-500/30">
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>YGGDRASIL ENTERPRISE PLATFORM • ARQUITECTURA FINTECH 3.0</span>
+              <span>
+                {isCommercial 
+                  ? 'YGGDRASIL ENTERPRISE PLATFORM • BIAN v11 BANKING ARCHITECTURE' 
+                  : 'YGGDRASIL ENTERPRISE PLATFORM • ARQUITECTURA FINTECH 3.0'}
+              </span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
-              Switching Financiero Reactivo y Aseguramiento Agéntico de Calidad
+              {isCommercial 
+                ? 'Plataforma Bancaria de Switching Financiero y Certificación Transaccional' 
+                : 'Switching Financiero Reactivo y Aseguramiento Agéntico de Calidad'}
             </h1>
 
             <p className="text-base sm:text-lg text-slate-300 font-sans leading-relaxed max-w-3xl">
-              La primera infraestructura bancaria que une la velocidad extrema de procesamiento en sockets Netty (<strong className="text-white">&gt;10,000 TPS</strong> con latencias sub-5ms) con la autonomía de agentes de inteligencia artificial coordinados vía <strong className="text-white">Model Context Protocol (MCP)</strong> y blindados bajo el estándar <strong className="text-white">PCI-DSS v4.0</strong>.
+              {isCommercial ? (
+                <>
+                  Infraestructura bancaria de misión crítica estructurada según los estándares canónicos de <strong className="text-white">BIAN v11</strong> y <strong className="text-white">TOGAF 10</strong>. Conmutación financiera de ultra-alta velocidad (<strong className="text-white">&gt;10,000 TPS</strong>, latencia <strong className="text-white">&lt;4ms</strong>), orquestación de pruebas de certificación <strong className="text-white">ISO 8583 / ISO 20022</strong> y blindaje perimetral Zero-Trust bajo <strong className="text-white">PCI-DSS v4.0</strong>.
+                </>
+              ) : (
+                <>
+                  La primera infraestructura bancaria que une la velocidad extrema de procesamiento en sockets Netty (<strong className="text-white">&gt;10,000 TPS</strong> con latencias sub-5ms) con la autonomía de agentes de inteligencia artificial coordinados vía <strong className="text-white">Model Context Protocol (MCP)</strong> y blindados bajo el estándar <strong className="text-white">PCI-DSS v4.0</strong>.
+                </>
+              )}
             </p>
 
             {/* Quick Action CTAs */}
@@ -95,6 +116,14 @@ export const HomePage = () => {
               >
                 <Server className="w-4 h-4" />
                 <span>Explorar Topología Interactiva</span>
+              </button>
+
+              <button
+                onClick={() => scrollToSection('realms')}
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition active:scale-95 cursor-pointer"
+              >
+                <Building2 className="w-4 h-4 text-emerald-400" />
+                <span>{isCommercial ? 'Catálogo Soluciones BIAN' : 'Explorar Reinos'}</span>
               </button>
 
               <button
@@ -110,15 +139,7 @@ export const HomePage = () => {
                 className="flex items-center gap-2 px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 hover:border-slate-600 transition active:scale-95 cursor-pointer"
               >
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>Ver Informe TOGAF 10 &amp; BIAN</span>
-              </button>
-
-              <button
-                onClick={() => scrollToSection('spec')}
-                className="flex items-center gap-2 px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:text-white transition active:scale-95 cursor-pointer"
-              >
-                <FileCheck2 className="w-4 h-4 text-cyan-400" />
-                <span>Especificación Técnica</span>
+                <span>Informe TOGAF 10 &amp; BIAN</span>
               </button>
 
               <button
@@ -133,7 +154,11 @@ export const HomePage = () => {
             {/* Quick Launch Direct App Access */}
             <div className="pt-6 border-t border-slate-800/80 space-y-2.5">
               <span className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold block flex items-center gap-2">
-                <span>Acceso Rápido a Microservicios ({env.toUpperCase()} Environment):</span>
+                <span>
+                  {isCommercial 
+                    ? `Acceso Directo a Soluciones BIAN (${env.toUpperCase()} Environment):` 
+                    : `Acceso Rápido a Microservicios (${env.toUpperCase()} Environment):`}
+                </span>
               </span>
               <div className="flex flex-wrap gap-2.5">
                 {activeApps.map(app => {
@@ -147,9 +172,13 @@ export const HomePage = () => {
                       className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 hover:bg-slate-800 border border-slate-800 hover:border-amber-400/50 text-white transition shadow-sm active:scale-95 group cursor-pointer"
                     >
                       <span className="text-sm font-serif font-bold text-amber-400">{app.rune}</span>
-                      <span>{app.name}</span>
+                      <span>
+                        {isCommercial 
+                          ? app.commercialName.split(' ')[0] + ' ' + (app.commercialName.split(' ')[1] || '') 
+                          : app.name}
+                      </span>
                       <span className="text-[10px] font-mono text-slate-400 group-hover:text-amber-300">
-                        :{app.ports.frontend}
+                        [{app.internalCodename}]
                       </span>
                       <ExternalLink className="w-3 h-3 text-slate-500 group-hover:text-white" />
                     </a>
@@ -196,16 +225,20 @@ export const HomePage = () => {
         </section>
 
         {/* =========================================================================
-            6. CATÁLOGO COMPLETO DE REINOS & MÓDULOS
+            6. CATÁLOGO COMPLETO DE SOLUCIONES BIAN / REINOS
         ========================================================================= */}
         <section id="realms" className="space-y-6 scroll-mt-24">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-2xl font-bold font-runic text-white">
-                Directorio de Reinos Transaccionales
+                {isCommercial 
+                  ? 'Catálogo de Soluciones Financieras BIAN v11' 
+                  : 'Directorio de Reinos Transaccionales'}
               </h2>
               <p className="text-xs text-slate-400">
-                Cambia entre la vista en cuadrícula o el árbol cósmico interactivo
+                {isCommercial 
+                  ? 'Dominios bancarios canónicos de la plataforma con nombre clave e interno de ingeniería' 
+                  : 'Cambia entre la vista en cuadrícula o el cosmograma interactivo'}
               </p>
             </div>
 
@@ -244,6 +277,8 @@ export const HomePage = () => {
               onOpenDetails={setSelectedRealm} 
               env={env}
               onEnvChange={setEnv}
+              presentationMode={presentationMode}
+              onPresentationModeChange={setPresentationMode}
             />
           )}
         </section>
@@ -286,11 +321,13 @@ export const HomePage = () => {
         </footer>
       </div>
 
-      {/* Modal Detailed Lore */}
+      {/* Modal Detailed Product Sheet & Engineering Specs */}
       {selectedRealm && (
         <RealmDetailModal
           realm={selectedRealm}
           onClose={() => setSelectedRealm(null)}
+          initialMode={presentationMode}
+          env={env}
         />
       )}
     </PortalLayout>
