@@ -8,7 +8,7 @@ import {
   Shield,
   FileCheck2,
   Code2,
-  Server
+  Workflow
 } from 'lucide-react';
 
 export const PortalNavbar = ({ 
@@ -20,6 +20,7 @@ export const PortalNavbar = ({
   const navItems = [
     { id: 'topology', label: 'Topología', icon: Server },
     { id: 'commercial', label: 'Solución Comercial', icon: Sparkles },
+    { id: 'tobe', label: 'Arquitectura To-Be', icon: Workflow },
     { id: 'realms', label: 'Reinos & Módulos', icon: Layers },
     { id: 'togaf', label: 'Informe TOGAF 10', icon: Shield },
     { id: 'spec', label: 'Especificación', icon: FileCheck2 },

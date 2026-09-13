@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TOGAF_REPORT_DATA } from '../../data/togafReportData';
+import { TargetArchitectureVisualizer } from './TargetArchitectureVisualizer';
 import { 
   Building2, 
   Database, 
@@ -293,41 +294,7 @@ export const TogafAssessmentSection = () => {
       {/* Tab 5: To-Be Blueprint */}
       {activeTab === 'tobe' && (
         <div className="space-y-6 animate-fadeIn">
-          <div className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 space-y-3">
-            <h3 className="text-sm font-mono font-bold uppercase tracking-wider text-amber-400">
-              Arquitectura Objetivo (To-Be Architecture)
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              La arquitectura To-Be segrega limpiamente el <strong>Plano de Borde Zero-Trust</strong> (Valgrind Gateway con PDP Redis sub-2ms y Glitnir Identity con JWKS), el <strong>Data Plane Financiero</strong> (Asgard Netty con TLS y Utgard Simulator con enclave Svartalfheim HSM), el <strong>Plano de Control</strong> (Bifrost QA Gate y Midgard con Envelope Encryption PCI), el <strong>Backbone de Eventos Asíncronos</strong> (Apache Kafka) y el <strong>Plano de Custodia WORM</strong> (Mimir Storage Vault con S3 Object Lock).
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-            <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-2">
-              <span className="font-mono text-amber-400 font-bold block">1. Saneamiento de Puertos</span>
-              <p className="text-slate-300">
-                Se resuelve la colisión 8080 moviendo Utgard a <code>:8086</code> y Valgrind como Ingress único en <code>:8080</code>. Canal ISO ASCII reubicado a <code>:9001</code> liberando <code>:9000</code> para MinIO S3.
-              </p>
-            </div>
-            <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-2">
-              <span className="font-mono text-emerald-400 font-bold block">2. Aislamiento CDE PCI-DSS v4.0</span>
-              <p className="text-slate-300">
-                Implementación de Envelope Encryption en reposo (AES-256-GCM) para tarjetas en Midgard y tokenización out-of-scope para minimizar la superficie auditable.
-              </p>
-            </div>
-            <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-2">
-              <span className="font-mono text-sky-400 font-bold block">3. Ingress Zero-Trust Estricto</span>
-              <p className="text-slate-300">
-                El 100% de los clientes web y agentes transitan por Valgrind con validación JWKS asimétrica y acuñación de tokens efímeros (60s) para la malla interna.
-              </p>
-            </div>
-            <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-2">
-              <span className="font-mono text-indigo-400 font-bold block">4. Backbone Kafka &amp; WORM Ledger</span>
-              <p className="text-slate-300">
-                Desacoplamiento del sniffer de tráfico de Asgard hacia tópicos Kafka y sellado Merkle Tree en Mimir con S3 Object Lock en modo Compliance.
-              </p>
-            </div>
-          </div>
+          <TargetArchitectureVisualizer />
         </div>
       )}
     </div>

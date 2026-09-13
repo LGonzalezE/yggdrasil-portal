@@ -3,6 +3,7 @@ import { PortalLayout } from '../templates/PortalLayout';
 import { PortalNavbar } from '../organisms/PortalNavbar';
 import { PlatformTopologyAnimation } from '../organisms/PlatformTopologyAnimation';
 import { CommercialShowcaseSection } from '../organisms/CommercialShowcaseSection';
+import { TargetArchitectureVisualizer } from '../organisms/TargetArchitectureVisualizer';
 import { TogafAssessmentSection } from '../organisms/TogafAssessmentSection';
 import { FormalSpecSection } from '../organisms/FormalSpecSection';
 import { DeveloperHubSection } from '../organisms/DeveloperHubSection';
@@ -25,7 +26,8 @@ import {
   FileCheck2,
   Compass,
   Code2,
-  Lock
+  Lock,
+  Workflow
 } from 'lucide-react';
 
 export const HomePage = () => {
@@ -94,6 +96,14 @@ export const HomePage = () => {
               </button>
 
               <button
+                onClick={() => scrollToSection('tobe')}
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 transition active:scale-95 cursor-pointer"
+              >
+                <Workflow className="w-4 h-4 text-amber-400" />
+                <span>Arquitectura Objetivo (To-Be)</span>
+              </button>
+
+              <button
                 onClick={() => scrollToSection('togaf')}
                 className="flex items-center gap-2 px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 hover:border-slate-600 transition active:scale-95 cursor-pointer"
               >
@@ -155,7 +165,14 @@ export const HomePage = () => {
         </section>
 
         {/* =========================================================================
-            4. INFORME DE ARQUITECTURA TOGAF 10 & BIAN
+            4. VISUALIZACIÓN DE LA ARQUITECTURA OBJETIVO (TO-BE BLUEPRINT)
+        ========================================================================= */}
+        <section id="tobe" className="scroll-mt-24">
+          <TargetArchitectureVisualizer />
+        </section>
+
+        {/* =========================================================================
+            5. INFORME DE ARQUITECTURA TOGAF 10 & BIAN
         ========================================================================= */}
         <section id="togaf" className="scroll-mt-24">
           <TogafAssessmentSection />
