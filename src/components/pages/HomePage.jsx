@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { PortalLayout } from '../templates/PortalLayout';
 import { PortalNavbar } from '../organisms/PortalNavbar';
-import { YggdrasilTreeCosmos } from '../organisms/YggdrasilTreeCosmos';
+import { PlatformTopologyAnimation } from '../organisms/PlatformTopologyAnimation';
+import { CommercialShowcaseSection } from '../organisms/CommercialShowcaseSection';
+import { TogafAssessmentSection } from '../organisms/TogafAssessmentSection';
+import { FormalSpecSection } from '../organisms/FormalSpecSection';
+import { DeveloperHubSection } from '../organisms/DeveloperHubSection';
 import { RealmsGrid } from '../organisms/RealmsGrid';
+import { YggdrasilTreeCosmos } from '../organisms/YggdrasilTreeCosmos';
 import { RealmDetailModal } from '../organisms/RealmDetailModal';
 import { REALMS } from '../../data/realmsData';
 import { 
@@ -15,79 +20,236 @@ import {
   Flame, 
   Eye, 
   Globe2,
-  ArrowRight
+  ArrowRight,
+  Server,
+  FileCheck2,
+  Compass,
+  Code2,
+  Lock
 } from 'lucide-react';
 
 export const HomePage = () => {
   const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'tree'
   const [selectedRealm, setSelectedRealm] = useState(null);
+  const [env, setEnv] = useState('dev'); // 'dev' | 'local'
+  const [activeSection, setActiveSection] = useState('topology');
 
   const activeApps = REALMS.filter(r => r.hasApp);
+
+  const scrollToSection = (sectionId) => {
+    setActiveSection(sectionId);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <PortalLayout
       header={
         <PortalNavbar 
-          viewMode={viewMode} 
-          onViewModeChange={setViewMode} 
+          activeSection={activeSection}
+          onSectionClick={scrollToSection}
+          env={env}
+          onEnvChange={setEnv}
         />
       }
     >
-      {/* Hero Welcome Banner */}
-      <div className="relative mb-12 rounded-3xl p-8 sm:p-12 overflow-hidden border border-white/10 bg-gradient-to-r from-amber-950/20 via-slate-950/80 to-purple-950/20 shadow-2xl">
-        <div className="absolute right-0 top-0 bottom-0 w-1/3 opacity-10 bg-no-repeat bg-right pointer-events-none flex items-center justify-center font-serif text-[240px] text-amber-400 select-none">
-          ᛦ
-        </div>
+      <div id="top" className="space-y-20 pb-16">
+        {/* =========================================================================
+            1. HERO CORPORATIVO & PROPUESTA DE VALOR
+        ========================================================================= */}
+        <section className="relative rounded-3xl p-8 sm:p-14 overflow-hidden border border-slate-800 bg-gradient-to-b from-[#0B101E] via-[#070A14] to-[#04060C] shadow-2xl">
+          {/* Subtle Ambient Light Effects */}
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 right-10 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/30 mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span>Cosmología Nórdica &amp; Arquitectura Agéntica de QA</span>
+          {/* Watermark Rune */}
+          <div className="absolute right-6 top-6 bottom-6 w-1/4 opacity-5 flex items-center justify-center font-serif text-[260px] text-amber-300 pointer-events-none select-none">
+            ᛦ
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold font-runic text-white tracking-wide leading-tight mb-4">
-            El Árbol Cósmico de <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-emerald-400 to-sky-400">Yggdrasil</span>
-          </h1>
+          <div className="relative z-10 max-w-4xl space-y-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-amber-500/10 text-amber-300 border border-amber-500/30">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span>YGGDRASIL ENTERPRISE PLATFORM • ARQUITECTURA FINTECH 3.0</span>
+            </div>
 
-          <p className="text-sm sm:text-base text-slate-300 font-sans leading-relaxed mb-8">
-            En el principio no había tierra ni cielo, solo el fresno sagrado cuyas ramas abrazan la totalidad de la existencia. 
-            En nuestra plataforma, <strong>Yggdrasil</strong> unifica la simulación de redes de pago, el switch transaccional de alta velocidad y el aprovisionamiento de entidades financieras bajo la tutela de agentes autónomos divinos.
-          </p>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+              Switching Financiero Reactivo y Aseguramiento Agéntico de Calidad
+            </h1>
 
-          {/* Quick Access Pills for the 4 Active Apps */}
-          <div className="space-y-2">
-            <span className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold block">
-              Acceso Rápido a las Suites en Vivo:
-            </span>
-            <div className="flex flex-wrap gap-2.5">
-              {activeApps.map(app => (
-                <a
-                  key={app.id}
-                  href={app.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 hover:bg-slate-800 border border-white/10 hover:border-amber-400/50 text-white transition-all shadow-md active:scale-95 group cursor-pointer"
-                >
-                  <span className="text-sm font-serif font-bold text-amber-400">{app.rune}</span>
-                  <span>{app.name}</span>
-                  <span className="text-[10px] font-mono text-slate-400 group-hover:text-amber-300">
-                    :{app.ports.frontend}
-                  </span>
-                  <ExternalLink className="w-3 h-3 text-slate-400 group-hover:text-white" />
-                </a>
-              ))}
+            <p className="text-base sm:text-lg text-slate-300 font-sans leading-relaxed max-w-3xl">
+              La primera infraestructura bancaria que une la velocidad extrema de procesamiento en sockets Netty (<strong className="text-white">&gt;10,000 TPS</strong> con latencias sub-5ms) con la autonomía de agentes de inteligencia artificial coordinados vía <strong className="text-white">Model Context Protocol (MCP)</strong> y blindados bajo el estándar <strong className="text-white">PCI-DSS v4.0</strong>.
+            </p>
+
+            {/* Quick Action CTAs */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <button
+                onClick={() => scrollToSection('topology')}
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition shadow-lg shadow-amber-500/25 active:scale-95 cursor-pointer"
+              >
+                <Server className="w-4 h-4" />
+                <span>Explorar Topología Interactiva</span>
+              </button>
+
+              <button
+                onClick={() => scrollToSection('togaf')}
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 hover:border-slate-600 transition active:scale-95 cursor-pointer"
+              >
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span>Ver Informe TOGAF 10 &amp; BIAN</span>
+              </button>
+
+              <button
+                onClick={() => scrollToSection('spec')}
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:text-white transition active:scale-95 cursor-pointer"
+              >
+                <FileCheck2 className="w-4 h-4 text-cyan-400" />
+                <span>Especificación Técnica</span>
+              </button>
+            </div>
+
+            {/* Quick Launch Direct App Access */}
+            <div className="pt-6 border-t border-slate-800/80 space-y-2.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold block flex items-center gap-2">
+                <span>Acceso Rápido a Microservicios ({env.toUpperCase()} Environment):</span>
+              </span>
+              <div className="flex flex-wrap gap-2.5">
+                {activeApps.map(app => {
+                  const targetUrl = env === 'dev' ? (app.devUrl || app.url) : (app.localUrl || app.url);
+                  return (
+                    <a
+                      key={app.id}
+                      href={targetUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 hover:bg-slate-800 border border-slate-800 hover:border-amber-400/50 text-white transition shadow-sm active:scale-95 group cursor-pointer"
+                    >
+                      <span className="text-sm font-serif font-bold text-amber-400">{app.rune}</span>
+                      <span>{app.name}</span>
+                      <span className="text-[10px] font-mono text-slate-400 group-hover:text-amber-300">
+                        :{app.ports.frontend}
+                      </span>
+                      <ExternalLink className="w-3 h-3 text-slate-500 group-hover:text-white" />
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* Main View Area (Interactive Cosmogram Tree OR Realms Grid) */}
-      <div className="mb-12">
-        {viewMode === 'tree' ? (
-          <YggdrasilTreeCosmos onSelectRealm={setSelectedRealm} />
-        ) : (
-          <RealmsGrid onOpenDetails={setSelectedRealm} />
-        )}
+        {/* =========================================================================
+            2. ANIMACIÓN DE TOPOLOGÍA INTERACTIVA (OVERVIEW GENERAL)
+        ========================================================================= */}
+        <section id="topology" className="space-y-6 scroll-mt-24">
+          <PlatformTopologyAnimation />
+        </section>
+
+        {/* =========================================================================
+            3. VITRINA COMERCIAL B2B
+        ========================================================================= */}
+        <section id="commercial" className="scroll-mt-24">
+          <CommercialShowcaseSection />
+        </section>
+
+        {/* =========================================================================
+            4. INFORME DE ARQUITECTURA TOGAF 10 & BIAN
+        ========================================================================= */}
+        <section id="togaf" className="scroll-mt-24">
+          <TogafAssessmentSection />
+        </section>
+
+        {/* =========================================================================
+            5. ESPECIFICACIÓN TÉCNICA FORMAL SEGÚN GEMINI DIRECTIVE
+        ========================================================================= */}
+        <section id="spec" className="scroll-mt-24">
+          <FormalSpecSection />
+        </section>
+
+        {/* =========================================================================
+            6. CATÁLOGO COMPLETO DE REINOS & MÓDULOS
+        ========================================================================= */}
+        <section id="realms" className="space-y-6 scroll-mt-24">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-bold font-runic text-white">
+                Directorio de Reinos Transaccionales
+              </h2>
+              <p className="text-xs text-slate-400">
+                Cambia entre la vista en cuadrícula o el árbol cósmico interactivo
+              </p>
+            </div>
+
+            <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-semibold">
+              <button
+                type="button"
+                onClick={() => setViewMode('grid')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition cursor-pointer ${
+                  viewMode === 'grid'
+                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <Layers className="w-3.5 h-3.5" />
+                <span>Cuadrícula</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode('tree')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition cursor-pointer ${
+                  viewMode === 'tree'
+                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <Compass className="w-3.5 h-3.5" />
+                <span>Cosmograma</span>
+              </button>
+            </div>
+          </div>
+
+          {viewMode === 'tree' ? (
+            <YggdrasilTreeCosmos onSelectRealm={setSelectedRealm} />
+          ) : (
+            <RealmsGrid 
+              onOpenDetails={setSelectedRealm} 
+              env={env}
+              onEnvChange={setEnv}
+            />
+          )}
+        </section>
+
+        {/* =========================================================================
+            7. DEVELOPER & ARCHITECT HUB
+        ========================================================================= */}
+        <section id="devhub" className="scroll-mt-24">
+          <DeveloperHubSection />
+        </section>
+
+        {/* =========================================================================
+            8. FOOTER CORPORATIVO
+        ========================================================================= */}
+        <footer className="border-t border-slate-800/80 pt-10 text-xs text-slate-400 space-y-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="font-runic font-bold text-base text-white">YGGDRASIL PLATFORM</span>
+              <span className="text-slate-600">•</span>
+              <span>Edición Empresarial v3.0.0</span>
+            </div>
+
+            <div className="flex flex-wrap gap-4 font-mono text-[11px]">
+              <span className="text-slate-500">Alineación: TOGAF 10 &amp; BIAN v11</span>
+              <span className="text-slate-500">Seguridad: PCI-DSS v4.0 &amp; SABSA</span>
+              <span className="text-emerald-400 font-bold">Dokploy DEV: Operativo</span>
+            </div>
+          </div>
+
+          <div className="text-center text-[11px] text-slate-500">
+            © 2026 Yggdrasil Financial Platform. Plataforma Agéntica Distribuida de Aseguramiento de Calidad y Switching Transaccional.
+          </div>
+        </footer>
       </div>
 
       {/* Modal Detailed Lore */}

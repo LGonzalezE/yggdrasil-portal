@@ -1,22 +1,61 @@
 export const REALMS = [
   {
+    id: 'valgrind',
+    name: 'Valgrind',
+    subtitle: 'La Puerta Sagrada de Entrada',
+    appTitle: 'Valgrind Core API Gateway',
+    category: 'Reactive Edge & Zero-Trust Security',
+    hasApp: true,
+    status: 'active',
+    bianDomain: 'Financial Gateway',
+    devUrl: 'http://valgrind-dev.yggdrasil.local:8080',
+    localUrl: 'http://localhost:8080',
+    url: 'http://valgrind-dev.yggdrasil.local:8080',
+    ports: {
+      frontend: 8080,
+      backend: 8080,
+      extra: 'Redis PDP <2ms'
+    },
+    agent: {
+      name: 'Valquiria Guardián',
+      title: 'Protectora del Umbral y Token Minting',
+      role: 'Perimeter PDP & Zero-Trust Interceptor',
+      engine: 'Spring Cloud Gateway / Reactive Redis',
+      avatarIcon: 'Shield'
+    },
+    rune: 'ᚹ',
+    runeName: 'Wunjo',
+    runeMeaning: 'Armonía, Protección y Perfección de Entrada',
+    accentColor: 'blue',
+    gradient: 'from-blue-500/20 via-indigo-500/10 to-slate-950',
+    borderGlow: 'hover:border-blue-400/80 hover:shadow-blue-500/30',
+    textColor: 'text-blue-400',
+    badgeColor: 'bg-blue-500/15 text-blue-300 border-blue-500/30',
+    description: 'Punto de entrada reactivo y de ultra-bajo retardo (<2ms) para toda la plataforma. Aplica autenticación JWT descentralizada vía JWKS, autorización dinámica mediante Redis PDP con resiliencia Fail-Closed y acuñación de tokens Zero-Trust para la red interna.',
+    techStack: ['Spring Boot 3.3.4', 'Spring Cloud Gateway', 'Reactive Redis', 'Nimbus JOSE/JWT']
+  },
+  {
     id: 'asgard',
     name: 'Asgard',
     subtitle: 'Reino Celestial de los Æsir',
     appTitle: 'Asgard QA Switch',
     category: 'Switching & Routing Core',
     hasApp: true,
-    url: 'http://asgard-qa-switch.yggdrasil.local:3004',
+    status: 'active',
+    bianDomain: 'Financial Gateway / Payment Execution',
+    devUrl: 'http://asgard-dev.yggdrasil.local:3004',
+    localUrl: 'http://localhost:3004',
+    url: 'http://asgard-dev.yggdrasil.local:3004',
     ports: {
       frontend: 3004,
       backend: 8083,
-      tcp: '8087 (HPDH) / 9000 (ISO)'
+      tcp: '8087 (HPDH) / 9001 (ISO)'
     },
     agent: {
       name: 'Hermod',
       title: 'El Veloz Mensajero de los Dioses',
       role: 'Switch Controller & AI Herald',
-      engine: 'Hermes Engine :8646 / Dynamic TCP',
+      engine: 'Netty EventLoop / Hermes MCP :8083/mcp',
       avatarIcon: 'Zap'
     },
     rune: 'ᚫ',
@@ -27,7 +66,7 @@ export const REALMS = [
     borderGlow: 'hover:border-amber-400/80 hover:shadow-amber-500/30',
     textColor: 'text-amber-400',
     badgeColor: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
-    description: 'La cumbre dorada del cosmos donde residen los dioses. En Asgard opera el switch transaccional de alta velocidad, las compuertas TCP multi-puerto, las reglas de contingencia STIP y el Circuit Breaker de protección.',
+    description: 'La cumbre dorada del cosmos donde residen los dioses. En Asgard opera el switch transaccional de alta velocidad, las compuertas TCP multi-puerto, las reglas de contingencia STIP, sniffer de tráfico en vivo y el Circuit Breaker de protección.',
     techStack: ['Spring Boot 3.3.4', 'Netty TCP Server', 'ISO-8583 Engine', 'React 18']
   },
   {
@@ -37,7 +76,11 @@ export const REALMS = [
     appTitle: 'Bifrost QA Gate',
     category: 'QA Gateway & ISO-8583 Orchestrator',
     hasApp: true,
-    url: 'http://bifrost-qa-gate.yggdrasil.local:3001',
+    status: 'active',
+    bianDomain: 'Payment Assessment / Certification Suite',
+    devUrl: 'http://bifrost-dev.yggdrasil.local',
+    localUrl: 'http://localhost:3001',
+    url: 'http://bifrost-dev.yggdrasil.local',
     ports: {
       frontend: 3001,
       backend: 8081,
@@ -47,7 +90,7 @@ export const REALMS = [
       name: 'Heimdall',
       title: 'El Guardián de Visión Infinita',
       role: 'Autonomous QA Agent & Gatekeeper',
-      engine: 'Hermes AI Engine :8645',
+      engine: 'Hermes AI Engine :8645 / MCP :8081/mcp',
       avatarIcon: 'Eye'
     },
     rune: 'ᛒ',
@@ -58,7 +101,7 @@ export const REALMS = [
     borderGlow: 'hover:border-emerald-400/80 hover:shadow-emerald-500/30',
     textColor: 'text-emerald-400',
     badgeColor: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
-    description: 'El puente ardiente y tricolor que conecta los mundos. Como compuerta de QA, inspecciona, valida y orquesta la inyección de transacciones financieras, pruebas de escenarios y certificación de tramas ISO 8583.',
+    description: 'El puente ardiente que conecta los mundos. Como compuerta de QA, inspecciona, valida y orquesta la inyección de transacciones financieras, pruebas de escenarios multi-paso, inyección de estrés de hasta 200 hilos y certificación de tramas ISO 8583.',
     techStack: ['Spring Boot 3.3.4', 'Hermes MCP Bridge', 'ISO Packet Inspector', 'React 18']
   },
   {
@@ -66,9 +109,13 @@ export const REALMS = [
     name: 'Midgard',
     subtitle: 'El Mundo de los Mortales',
     appTitle: 'Midgard QA Entities',
-    category: 'Financial Entities Provisioner',
+    category: 'Financial Entities & PCI Vault',
     hasApp: true,
-    url: 'http://midgard-qa-entities.yggdrasil.local:3002',
+    status: 'active',
+    bianDomain: 'Card Product Directory / Merchant Relations',
+    devUrl: 'http://midgard-dev.yggdrasil.local:3002',
+    localUrl: 'http://localhost:3002',
+    url: 'http://midgard-dev.yggdrasil.local:3002',
     ports: {
       frontend: 3002,
       backend: 8082,
@@ -78,7 +125,7 @@ export const REALMS = [
       name: 'Rig',
       title: 'El Dios Caminante y Forjador de Linajes',
       role: 'Entity Provisioner & Merchant Architect',
-      engine: 'Hermes AI Engine :8647',
+      engine: 'Hermes AI Engine :8647 / MCP :8082/mcp',
       avatarIcon: 'Globe2'
     },
     rune: 'ᛗ',
@@ -89,8 +136,8 @@ export const REALMS = [
     borderGlow: 'hover:border-teal-400/80 hover:shadow-teal-500/30',
     textColor: 'text-teal-400',
     badgeColor: 'bg-teal-500/15 text-teal-300 border-teal-500/30',
-    description: 'El reino medio habitado por la humanidad y cercado por la gran serpiente. Aquí se aprovisiona el ecosistema transaccional: emisión de tarjetas Visa/Mastercard/Amex, comercios adquirentes y terminales POS.',
-    techStack: ['Spring Boot 3.3.4', 'JPA / H2 Store', 'MCP Financial Tools', 'React 18']
+    description: 'El reino medio habitado por la sociedad mercantil. Aquí se aprovisiona el catálogo maestro transaccional: emisión de tarjetas Visa/Mastercard/Amex, comercios adquirentes (MID, MCC), terminales POS y tokenización dinámica compatible con PCI-DSS.',
+    techStack: ['Spring Boot 3.3.4', 'PostgreSQL / JPA', 'Luhn Generator', 'React 18']
   },
   {
     id: 'utgard',
@@ -99,17 +146,21 @@ export const REALMS = [
     appTitle: 'Utgard QA Simulator',
     category: 'Issuer Simulator & Chaos Engine',
     hasApp: true,
-    url: 'http://utgard-qa-simulator.yggdrasil.local:3003',
+    status: 'active',
+    bianDomain: 'Card Authorization / Issuer Processing',
+    devUrl: 'http://utgard-dev.yggdrasil.local:3003',
+    localUrl: 'http://localhost:3003',
+    url: 'http://utgard-dev.yggdrasil.local:3003',
     ports: {
       frontend: 3003,
-      backend: 8080,
+      backend: 8086,
       extra: 'Bridge :8646'
     },
     agent: {
       name: 'Loki',
       title: 'El Dios de las Ilusiones y la Astucia',
       role: 'Chaos Engineer & Multi-Issuer Simulator',
-      engine: 'Hermes AI Engine :8646',
+      engine: 'Hermes AI Engine :8646 / MCP :8080/mcp',
       avatarIcon: 'Flame'
     },
     rune: 'ᚦ',
@@ -120,128 +171,135 @@ export const REALMS = [
     borderGlow: 'hover:border-purple-400/80 hover:shadow-purple-500/30',
     textColor: 'text-purple-400',
     badgeColor: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
-    description: 'La inmensa fortaleza más allá del orden divino donde gobiernan la astucia y las pruebas del caos. Simula las redes autorizadoras (Visa, Mastercard, AMEX) e inyecta latencias, timeouts deliberados y códigos de rechazo.',
-    techStack: ['Spring Boot 3.3.4', 'Multi-Port Netty', 'ISO Profile Engine', 'React + TS']
+    description: 'La inmensa fortaleza donde gobiernan la astucia y las pruebas del caos. Simula redes autorizadoras (Visa, Mastercard, AMEX), evalúa reglas declarativas SpEL en tiempo real e inyecta latencias, timeouts deliberados y códigos de rechazo.',
+    techStack: ['Spring Boot 3.3.4', 'Netty Multi-Port', 'SpEL Rule Engine', 'React + TS']
   },
   {
-    id: 'alfheim',
-    name: 'Alfheim',
-    subtitle: 'El Reino de la Luz Primordial',
-    appTitle: 'Design System & Semantic Tokens',
-    category: 'UI & Visual Aesthetics (Latente)',
-    hasApp: false,
+    id: 'glitnir',
+    name: 'Glitnir',
+    subtitle: 'El Palacio de Justicia y Plata',
+    appTitle: 'Glitnir Identity Provider',
+    category: 'Identity & Access Management (IAM)',
+    hasApp: true,
+    status: 'active',
+    bianDomain: 'Party Authentication & Access Governance',
+    devUrl: 'http://glitnir-dev.yggdrasil.local:8085',
+    localUrl: 'http://localhost:8085',
+    url: 'http://glitnir-dev.yggdrasil.local:8085',
+    ports: {
+      frontend: 8085,
+      backend: 8085,
+      extra: 'OAuth2 / JWKS'
+    },
     agent: {
-      name: 'Freyr & Los Elfos de Luz',
-      title: 'Los Artífices de la Luz y la Belleza',
-      role: 'Design Tokens & Semantic Consistency',
-      engine: 'Arquitectura en Estado Latente'
+      name: 'Forseti',
+      title: 'El Juez Imparcial del Olimpo Nórdico',
+      role: 'Identity Arbiter & Policy Seeder',
+      engine: 'Spring Authorization Server / RS256',
+      avatarIcon: 'Key'
+    },
+    rune: 'ᚷ',
+    runeName: 'Gebo',
+    runeMeaning: 'El Don, Contrato y Alianza Sagrada',
+    accentColor: 'sky',
+    gradient: 'from-sky-500/20 via-cyan-500/10 to-slate-950',
+    borderGlow: 'hover:border-sky-400/80 hover:shadow-sky-500/30',
+    textColor: 'text-sky-400',
+    badgeColor: 'bg-sky-500/15 text-sky-300 border-sky-500/30',
+    description: 'El palacio resplandeciente con pilares de oro rojo y techos de plata. Custodia la gobernanza de identidad centralizada, catálogo dinámico de permisos RBAC+ABAC para usuarios humanos y credenciales mTLS para agentes autónomos.',
+    techStack: ['Spring Boot 3.2.3', 'Spring Data JPA', 'PostgreSQL', 'OAuth2 / OIDC']
+  },
+  {
+    id: 'svalinn',
+    name: 'Svalinn',
+    subtitle: 'El Escudo Primordial',
+    appTitle: 'Svalinn Agentic Guardrails Gateway',
+    category: 'Agentic AI Safety & PII Defense',
+    hasApp: true,
+    status: 'active',
+    bianDomain: 'Fraud Evaluation & Security Boundary',
+    devUrl: 'http://svalinn-dev.yggdrasil.local:8000',
+    localUrl: 'http://localhost:8000',
+    url: 'http://svalinn-dev.yggdrasil.local:8000',
+    ports: {
+      frontend: 8000,
+      backend: 8000,
+      extra: 'Swagger /docs'
+    },
+    agent: {
+      name: 'Escudo Svalinn',
+      title: 'Protector Ante el Fuego de la Inyección',
+      role: 'Prompt Defense & HITL Safety Boundary',
+      engine: 'FastAPI / Pydantic / Colang 2.0',
+      avatarIcon: 'ShieldAlert'
     },
     rune: 'ᛋ',
     runeName: 'Sowilo',
-    runeMeaning: 'El Sol, Energía Radiante y Claridad',
-    accentColor: 'slate',
-    description: 'Tierra celestial de los Ljósálfar (Elfos Luminosos). En la plataforma representará el catálogo central de componentes visuales, tipografías rúnicas, microinteracciones y contratos semánticos para todos los frontends.',
-    techStack: ['Atomic Design', 'Tailwind CSS', 'Figma Tokens']
+    runeMeaning: 'El Sol, Claridad y Escudo Defensor',
+    accentColor: 'cyan',
+    gradient: 'from-cyan-500/20 via-teal-500/10 to-slate-950',
+    borderGlow: 'hover:border-cyan-400/80 hover:shadow-cyan-500/30',
+    textColor: 'text-cyan-400',
+    badgeColor: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30',
+    description: 'El escudo que se alza ante el sol para evitar que los mundos ardan. En la plataforma opera como gateway perimetral de seguridad para agentes de IA: previene inyecciones de prompt, anonimiza PANs con algoritmo de Luhn y activa flujos de aprobación humana (HITL).',
+    techStack: ['Python 3.12', 'FastAPI', 'Pydantic v2', 'LLM Guardrails']
   },
   {
-    id: 'vanaheim',
-    name: 'Vanaheim',
-    subtitle: 'Hogar de los Dioses Sabios',
-    appTitle: 'Analytics & Foresight Engine',
-    category: 'Real-time Analytics & Telemetry (Latente)',
-    hasApp: false,
+    id: 'mimir',
+    name: 'Mímir',
+    subtitle: 'La Fuente del Conocimiento Eterno',
+    appTitle: 'Mimir Storage Vault',
+    category: 'Immutable WORM Evidence Vault',
+    hasApp: true,
+    status: 'active',
+    bianDomain: 'Regulatory Compliance / Audit Ledger',
+    devUrl: 'http://mimir-dev.yggdrasil.local:8084',
+    localUrl: 'http://localhost:8084',
+    url: 'http://mimir-dev.yggdrasil.local:8084',
+    ports: {
+      frontend: 8084,
+      backend: 8084,
+      extra: 'MinIO S3 :9000'
+    },
     agent: {
-      name: 'Njörd & Los Sabios Vanir',
-      title: 'Guardianes de los Ciclos y el Destino',
-      role: 'Deep Metrics & Foresight Analytics',
-      engine: 'Arquitectura en Estado Latente'
+      name: 'Mímir el Sabio',
+      title: 'Custodio del Saber y Trazas Forenses',
+      role: 'Evidence Archival & Hash-Chain Ledger',
+      engine: 'Java 21 Virtual Threads / S3 SDK',
+      avatarIcon: 'Database'
     },
     rune: 'ᛁ',
     runeName: 'Isa',
-    runeMeaning: 'Quietud, Claridad y Retención',
-    accentColor: 'slate',
-    description: 'El mundo de los dioses Vanir, maestros de la naturaleza y la predicción del porvenir. Futura sede de los motores de telemetría analítica, detección predictiva de anomalías y reportes ejecutivos de liquidación.',
-    techStack: ['ClickHouse / Timescale', 'Prometheus', 'Grafana SDK']
+    runeMeaning: 'Quietud, Retención Cristalina e Inmutabilidad',
+    accentColor: 'indigo',
+    gradient: 'from-indigo-500/20 via-blue-500/10 to-slate-950',
+    borderGlow: 'hover:border-indigo-400/80 hover:shadow-indigo-500/30',
+    textColor: 'text-indigo-400',
+    badgeColor: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30',
+    description: 'La gloriosa fuente donde Odín entregó su ojo a cambio de sabiduría suprema. Almacén de evidencias transaccionales y trazas forenses con persistencia híbrida: metadatos indexables en PostgreSQL y payloads pesados en MinIO S3 con verificación SHA-256 inmutable.',
+    techStack: ['Spring Boot 3.3', 'Java 21 Virtual Threads', 'MinIO / S3', 'PostgreSQL 16']
   },
   {
     id: 'svartalfheim',
-    name: 'Svartalfheim / Nidavellir',
-    subtitle: 'Cavernas de los Herreros Divinos',
-    appTitle: 'Cryptographic Core & HSM Emulation',
-    category: 'HSM Cryptography & Key Ceremony (Latente)',
+    name: 'Svartalfheim',
+    subtitle: 'Cavernas de los Forjadores',
+    appTitle: 'Cryptographic Core & HSM Enclave',
+    category: 'HSM Cryptography & Key Ceremony',
     hasApp: false,
+    status: 'planned',
+    bianDomain: 'Cryptographic Key Management',
     agent: {
       name: 'Brokk & Sindri',
-      title: 'Los Forjadores del Martillo Mjölnir',
-      role: 'HSM Emulation & Crypto Cryptanalyst',
-      engine: 'Arquitectura en Estado Latente'
+      title: 'Forjadores del Martillo Mjölnir',
+      role: 'HSM Emulation & Cryptanalyst',
+      engine: 'Thales / SafeNet Simulator'
     },
     rune: 'ᛏ',
     runeName: 'Tiwaz',
     runeMeaning: 'Precisión, Lanza y Ley Inquebrantable',
     accentColor: 'slate',
-    description: 'Las profundas forjas subterráneas donde los maestros enanos modelan artefactos mágicos. Diseñado para el subsistema de criptografía de grado financiero: emulación HSM, cálculo PIN Block, validación MAC y llaves CVV/PVV.',
-    techStack: ['Thales / SafeNet Mock', 'Bouncy Castle', 'AES/3DES Engine']
-  },
-  {
-    id: 'muspelheim',
-    name: 'Muspelheim',
-    subtitle: 'El Reino del Fuego y la Alta Tensión',
-    appTitle: 'High-TPS Stress Engine',
-    category: 'Extreme Load & Concurrency (Latente)',
-    hasApp: false,
-    agent: {
-      name: 'Surtr',
-      title: 'El Señor del Fuego Primordial',
-      role: 'Extreme Stress & Overload Injector',
-      engine: 'Arquitectura en Estado Latente'
-    },
-    rune: 'ᚲ',
-    runeName: 'Kenaz',
-    runeMeaning: 'Antorcha, Fuego Devorador y Potencia',
-    accentColor: 'slate',
-    description: 'El ardiente reino de magma y llamas perpetuas custodiado por Surtr. En la plataforma acogerá el motor de pruebas de estrés masivo, inyección de miles de transacciones por segundo (TPS) y pruebas de resistencia térmica.',
-    techStack: ['Locust / Gatling Engine', 'ZeroMQ Pipes', 'Distributed Workers']
-  },
-  {
-    id: 'niflheim',
-    name: 'Niflheim',
-    subtitle: 'Tierra de la Niebla y el Hielo Frío',
-    appTitle: 'Immutable Cold Ledger',
-    category: 'Cold Storage & Audit Trail (Latente)',
-    hasApp: false,
-    agent: {
-      name: 'Níðhöggr',
-      title: 'El Dragón de las Raíces Cósmicas',
-      role: 'Cold Archival & Immutable Evidence',
-      engine: 'Arquitectura en Estado Latente'
-    },
-    rune: 'ᚺ',
-    runeName: 'Hagalaz',
-    runeMeaning: 'Granizo, Disrupción y Estructura Cristalina',
-    accentColor: 'slate',
-    description: 'El mundo gélido y brumoso en la base del universo, atravesado por los ríos primordiales. Futura bóveda inmutable para el almacenamiento en frío de bitácoras transaccionales, auditorías regulatorias y trazabilidad forense.',
-    techStack: ['S3 Glacier Mock', 'Parquet Compression', 'Merkle Tree Proofs']
-  },
-  {
-    id: 'helheim',
-    name: 'Helheim',
-    subtitle: 'El Reino de las Sombras y el Silencio',
-    appTitle: 'Dead Letter Queue & Post-Mortem',
-    category: 'DLQ & Fatal Error Audit (Latente)',
-    hasApp: false,
-    agent: {
-      name: 'Hel',
-      title: 'La Reina de los Destinos Irrevocables',
-      role: 'Dead Letter Queue & Post-Mortem Investigator',
-      engine: 'Arquitectura en Estado Latente'
-    },
-    rune: 'ᛟ',
-    runeName: 'Othala',
-    runeMeaning: 'El Legado, Lo Ancestral y lo Inmutable',
-    accentColor: 'slate',
-    description: 'El recinto de las almas que no cayeron en batalla, custodiado por la soberana Hel. Representará la Dead Letter Queue (DLQ) del switch, depósito de transacciones irrecuperables y asistente de análisis post-mortem.',
-    techStack: ['Kafka DLQ', 'Post-Mortem Analyzer', 'Incident Forensics']
+    description: 'Las profundas forjas subterráneas. Diseñado para acoger el enclave criptográfico de grado financiero: emulación de Hardware Security Modules (HSM), cálculo de PIN Blocks (Formatos 0/1/2/3), validación de criptogramas EMV ARQC/ARPC y llaves MAC.',
+    techStack: ['Bouncy Castle', 'Thales HSM Mock', 'AES / 3DES Engine']
   }
 ];
 

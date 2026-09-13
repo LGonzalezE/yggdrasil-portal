@@ -15,10 +15,11 @@ import {
   Info
 } from 'lucide-react';
 
-export const RealmCard = ({ realm, onOpenDetails }) => {
+export const RealmCard = ({ realm, onOpenDetails, env = 'dev' }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const isColor = realm.hasApp;
+  const targetUrl = env === 'dev' ? (realm.devUrl || realm.url) : (realm.localUrl || realm.url);
 
   const colorVariants = {
     amber: {
@@ -48,6 +49,34 @@ export const RealmCard = ({ realm, onOpenDetails }) => {
       title: 'text-purple-300',
       badge: 'purple',
       accentBtn: 'purple'
+    },
+    blue: {
+      card: 'border-blue-500/30 bg-gradient-to-b from-[#0B1526] to-[#060B14]',
+      hoverGlow: 'hover:border-blue-400 hover:shadow-[0_0_35px_-5px_rgba(59,130,246,0.35)]',
+      title: 'text-blue-300',
+      badge: 'blue',
+      accentBtn: 'primary'
+    },
+    cyan: {
+      card: 'border-cyan-500/30 bg-gradient-to-b from-[#081820] to-[#050D12]',
+      hoverGlow: 'hover:border-cyan-400 hover:shadow-[0_0_35px_-5px_rgba(6,182,212,0.35)]',
+      title: 'text-cyan-300',
+      badge: 'teal',
+      accentBtn: 'teal'
+    },
+    indigo: {
+      card: 'border-indigo-500/30 bg-gradient-to-b from-[#101226] to-[#080914]',
+      hoverGlow: 'hover:border-indigo-400 hover:shadow-[0_0_35px_-5px_rgba(99,102,241,0.35)]',
+      title: 'text-indigo-300',
+      badge: 'purple',
+      accentBtn: 'purple'
+    },
+    sky: {
+      card: 'border-sky-500/30 bg-gradient-to-b from-[#0B1724] to-[#060D14]',
+      hoverGlow: 'hover:border-sky-400 hover:shadow-[0_0_35px_-5px_rgba(56,189,248,0.35)]',
+      title: 'text-sky-300',
+      badge: 'blue',
+      accentBtn: 'primary'
     },
     slate: {
       card: 'border-slate-800 bg-[#090C14]/90',
@@ -104,7 +133,7 @@ export const RealmCard = ({ realm, onOpenDetails }) => {
         <div className="mb-4 p-3 rounded-2xl bg-black/40 border border-white/5 backdrop-blur-sm">
           <div className="flex items-center justify-between text-xs">
             <span className="text-slate-400 font-medium">
-              {isColor ? 'Suite QA:' : 'Dominio Mitológico:'}
+              {isColor ? 'Suite QA / Microservicio:' : 'Dominio Mitológico:'}
             </span>
             <span className={`font-semibold ${isColor ? themeConfig.title : 'text-slate-300'}`}>
               {realm.appTitle}
@@ -118,9 +147,15 @@ export const RealmCard = ({ realm, onOpenDetails }) => {
               </span>
             </div>
           )}
+          {realm.bianDomain && (
+            <div className="flex items-center justify-between text-[10px] font-mono mt-1 text-emerald-400/90 pt-1 border-t border-white/5">
+              <span className="text-slate-500 uppercase">BIAN Domain:</span>
+              <span className="truncate max-w-[180px]">{realm.bianDomain}</span>
+            </div>
+          )}
         </div>
 
-        {/* Dynamic Animation Lore on Hover */}
+        {/* Dynamic Description Lore */}
         <div className="space-y-3 mb-5">
           <div className="text-xs leading-relaxed text-slate-300 font-sans">
             <p className="line-clamp-3 group-hover:line-clamp-none transition-all">
@@ -144,14 +179,14 @@ export const RealmCard = ({ realm, onOpenDetails }) => {
                 <div className="overflow-hidden">
                   <div className="flex items-center gap-1.5">
                     <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400">
-                      Habitante Divino:
+                      Co-Piloto IA:
                     </span>
                     <span className={`text-xs font-bold truncate ${isColor ? themeConfig.title : 'text-slate-200'}`}>
                       {realm.agent.name}
                     </span>
                   </div>
                   <p className="text-[11px] text-slate-400 truncate">
-                    {realm.agent.title}
+                    {realm.agent.role}
                   </p>
                 </div>
               </div>
@@ -168,16 +203,16 @@ export const RealmCard = ({ realm, onOpenDetails }) => {
           className="text-xs text-slate-400 hover:text-white transition flex items-center gap-1 font-mono cursor-pointer"
         >
           <Info className="w-3.5 h-3.5" />
-          <span>Ver Lore</span>
+          <span>Detalles</span>
         </button>
 
         {isColor ? (
           <RunicButton
-            href={realm.url}
+            href={targetUrl}
             variant={themeConfig.accentBtn}
             size="sm"
           >
-            <span>Ingresar al Reino</span>
+            <span>Abrir ({env.toUpperCase()})</span>
           </RunicButton>
         ) : (
           <span className="text-[10px] font-mono text-slate-500 px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800">
