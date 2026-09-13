@@ -8,7 +8,8 @@ import {
   Shield,
   FileCheck2,
   Code2,
-  Workflow
+  Workflow,
+  Server
 } from 'lucide-react';
 
 export const PortalNavbar = ({ 
