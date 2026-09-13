@@ -7,6 +7,7 @@ import { TargetArchitectureVisualizer } from '../organisms/TargetArchitectureVis
 import { TogafAssessmentSection } from '../organisms/TogafAssessmentSection';
 import { FormalSpecSection } from '../organisms/FormalSpecSection';
 import { DeveloperHubSection } from '../organisms/DeveloperHubSection';
+import { FaqSection } from '../organisms/FaqSection';
 import { RealmsGrid } from '../organisms/RealmsGrid';
 import { YggdrasilTreeCosmos } from '../organisms/YggdrasilTreeCosmos';
 import { RealmDetailModal } from '../organisms/RealmDetailModal';
@@ -27,7 +28,8 @@ import {
   Compass,
   Code2,
   Lock,
-  Workflow
+  Workflow,
+  HelpCircle
 } from 'lucide-react';
 
 export const HomePage = () => {
@@ -117,6 +119,14 @@ export const HomePage = () => {
               >
                 <FileCheck2 className="w-4 h-4 text-cyan-400" />
                 <span>Especificación Técnica</span>
+              </button>
+
+              <button
+                onClick={() => scrollToSection('faq')}
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:text-amber-300 hover:border-amber-500/30 transition active:scale-95 cursor-pointer"
+              >
+                <HelpCircle className="w-4 h-4 text-amber-400" />
+                <span>FAQ &amp; Modelos</span>
               </button>
             </div>
 
@@ -246,7 +256,14 @@ export const HomePage = () => {
         </section>
 
         {/* =========================================================================
-            8. FOOTER CORPORATIVO
+            8. PREGUNTAS FRECUENTES (FAQ) & MODELOS DE REFERENCIA
+        ========================================================================= */}
+        <section id="faq" className="scroll-mt-24">
+          <FaqSection />
+        </section>
+
+        {/* =========================================================================
+            9. FOOTER CORPORATIVO
         ========================================================================= */}
         <footer className="border-t border-slate-800/80 pt-10 text-xs text-slate-400 space-y-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
